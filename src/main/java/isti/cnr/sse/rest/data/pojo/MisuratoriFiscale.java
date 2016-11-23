@@ -6,6 +6,8 @@ package isti.cnr.sse.rest.data.pojo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Generated;
 
 import org.glassfish.grizzly.utils.Pair;
@@ -106,4 +108,8 @@ public class MisuratoriFiscale implements Serializable {
         }
 
     }
+
+	public void setMap(Map<Integer, MisuratoreFiscale> map) {
+		getMisuratoreFiscale().addAll(map.values());
+	}
 }

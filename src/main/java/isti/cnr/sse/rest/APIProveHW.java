@@ -20,12 +20,12 @@ public interface APIProveHW {
 	
 	
 	
-	@Path("/")
+/*	@Path("/")
 	@POST
 	String putListMisuratoriFiscale(@FormParam("sendmisuratori") MisuratoriFiscale misuratori);
-	
+	*/
 
-	@Path("/{howmany:.*}")
+	@Path("misuratori/{howmany:.*}")
 	@GET
 	MisuratoriFiscale getListMisuratoriFiscale(@PathParam("howmany") String numeroelementi);
 	
