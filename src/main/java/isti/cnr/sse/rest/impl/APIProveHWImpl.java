@@ -28,7 +28,7 @@ public class APIProveHWImpl implements APIProveHW{
 	//@Inject 
 	//TokenPersistence em;
 
-	private static Map<Integer,MisuratoreFiscale> map = new HashMap<Integer,MisuratoreFiscale>();
+	private static Map<String,MisuratoreFiscale> map = new HashMap<String,MisuratoreFiscale>();
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APIProveHWImpl.class);
 

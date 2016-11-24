@@ -62,7 +62,6 @@ public class APIProveHWImplTest extends JerseyTest {
 		
 		
 		
-		fail("Not yet implemented");
 	}
 
 }

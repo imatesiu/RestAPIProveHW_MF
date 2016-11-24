@@ -84,8 +84,10 @@ public class ProveHW  implements Serializable {
         p.setTipo(a.getTipoProva());
         p.setMatricola(a.getMatricola());
         p.setModello(a.getModello());
+        p.setNumeroRapportoProva(a.getNumeroRapportoProva());
         p.setTimeStartPHW(a.getTime());
-        p.setEsito(Esito.Incorso);
+        p.setStato(StatoProve.Incorso);
+        p.setEsito(Esito.Incerto);
         getProvaHW().add(p);
         Allegati oo = p.getAllegati();
         oo.getAllegato().add(a);

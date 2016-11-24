@@ -2,12 +2,14 @@ package isti.cnr.sse.util;
 
 import isti.cnr.sse.rest.data.pojo.Allegati;
 import isti.cnr.sse.rest.data.pojo.Allegato;
+import isti.cnr.sse.rest.data.pojo.CondizioniProva;
 import isti.cnr.sse.rest.data.pojo.Esito;
 import isti.cnr.sse.rest.data.pojo.MisuratoreFiscale;
 import isti.cnr.sse.rest.data.pojo.MisuratoriFiscale;
 import isti.cnr.sse.rest.data.pojo.Note;
 import isti.cnr.sse.rest.data.pojo.ProvaHW;
 import isti.cnr.sse.rest.data.pojo.ProveHW;
+import isti.cnr.sse.rest.data.pojo.StatoProve;
 import isti.cnr.sse.rest.data.pojo.TipoProve;
 
 /**
@@ -29,6 +31,7 @@ public class JsonFactory {
         a2.setNome("Foto00000000000000000000000000000000.jpg");
         a2.setTipo("JPG");
         a2.setUserid("Gio");
+        a2.setNumeroRapportoProva("162023DD");
         a2.setTime("12/12/2016 12:15:16");
 
         Allegato a1 = new Allegato();
@@ -36,6 +39,7 @@ public class JsonFactory {
         a1.setNome("Foto00000000000000000000000000000000.jpg");
         a1.setTipo("JPG");
         a1.setUserid("Gio");
+        a1.setNumeroRapportoProva("162023DD");
         a1.setTime("12/12/2016 12:15:16");
 
 
@@ -45,8 +49,11 @@ public class JsonFactory {
 
 
         ProvaHW phw2 = new ProvaHW();
-        phw2.setEsito(Esito.Positivo);
+        phw2.setStato(StatoProve.EseguitainParte);
+        phw2.setEsito(Esito.Negativo);
         phw2.setMatricola("1122334455");
+        phw2.setCondizioniprova(CondizioniProva.Normale);
+        phw2.setNumeroRapportoProva("162023DD");
         phw2.setTipo(TipoProve.DisturbiElettromagnetici.toString());
         phw2.setModello("TIPO C");
         phw2.setUserid("Gio");
@@ -56,7 +63,10 @@ public class JsonFactory {
         phw2.setNote(new Note());
 
         ProvaHW phw1 = new ProvaHW();
+        phw1.setStato(StatoProve.Completa);
         phw1.setEsito(Esito.Positivo);
+        phw1.setCondizioniprova(CondizioniProva.Normale);
+        phw1.setNumeroRapportoProva("162023DD");
         phw1.setMatricola("1122334455");
         phw1.setTipo(TipoProve.DisturbiElettromagnetici.toString());
         phw1.setModello("TIPO C");
@@ -74,6 +84,7 @@ public class JsonFactory {
         MF.setDitta("SHS");
         MF.setModello("TIPO C");
         MF.setMatricola("1122334455");
+        MF.setNumeroRapportoProva("162023DD");
         MF.setTimeMFStart("12/12/2016 12:15:16");
         MF.setTimeMFEnd("13/12/2016 12:15:16");
         MF.setNome("TIPO");
@@ -84,16 +95,20 @@ public class JsonFactory {
         a.setMatricola("112233445566");
         a.setNome("Foto00000000000000000000000000000000.jpg");
         a.setTipo("JPG");
+        a.setNumeroRapportoProva("12023DD");
         a.setUserid("Gio");
         a.setTime("12/12/2016 12:15:16");
         Allegati aa = new Allegati();
         aa.getAllegato().add(a);
 
         ProvaHW phw = new ProvaHW();
-        phw.setEsito(Esito.Positivo);
+        phw.setStato(StatoProve.Completa);
+        phw.setCondizioniprova(CondizioniProva.Normale);
+        phw.setEsito(Esito.Negativo);
         phw.setMatricola("112233445566");
         phw.setTipo(TipoProve.DisturbiElettromagnetici.toString());
         phw.setModello("TIPO C");
+        phw.setNumeroRapportoProva("12023DD");
         phw.setUserid("Gio");
         phw.setTimeStartPHW("12/12/2016 12:15:16");
         phw.setTimeEndPHW("13/12/2016 12:15:16");
@@ -106,7 +121,9 @@ public class JsonFactory {
         MisuratoreFiscale MF2 = new MisuratoreFiscale();
         MF2.setDitta("SHS");
         MF2.setModello("TIPO C");
+        MF2.setNumeroRapportoProva("12023DD");
         MF2.setMatricola("112233445566");
+        
         MF2.setTimeMFStart("12/12/2016 12:15:16");
         MF2.setTimeMFEnd("13/12/2016 12:15:16");
         MF2.setNome("TIPO");

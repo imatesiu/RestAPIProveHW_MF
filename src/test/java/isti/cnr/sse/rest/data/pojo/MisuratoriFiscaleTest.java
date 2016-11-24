@@ -21,7 +21,6 @@ public class MisuratoriFiscaleTest {
 		 
 		System.out.println(gson.toJson(LMF));
 		 
-		fail("Not yet implemented");
 	}
 
 }

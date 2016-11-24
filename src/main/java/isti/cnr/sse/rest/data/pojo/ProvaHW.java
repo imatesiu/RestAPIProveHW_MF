@@ -15,6 +15,15 @@ public class ProvaHW implements Serializable, Comparable<ProvaHW> {
      * (Required)
      * 
      */
+	@SerializedName("NRapportoProva")
+	@Expose
+	private String numeroRapportoProva;
+	
+	@SerializedName("CondizioniProva")
+    @Expose
+    private CondizioniProva condizioniprova;
+	
+	
     @SerializedName("Matricola")
     @Expose
     private String matricola;
@@ -34,7 +43,21 @@ public class ProvaHW implements Serializable, Comparable<ProvaHW> {
     @SerializedName("Esito")
     @Expose
     private Esito esito;
-    /**
+    
+    @SerializedName("StatoProve")
+    @Expose
+    private StatoProve stato;
+    
+    
+    public StatoProve getStato() {
+		return stato;
+	}
+
+	public void setStato(StatoProve stato) {
+		this.stato = stato;
+	}
+
+	/**
      * 
      * (Required)
      * 
@@ -249,24 +272,36 @@ public class ProvaHW implements Serializable, Comparable<ProvaHW> {
     public void setModello(String modello) {
         this.modello = modello;
     }
+    
+    
 
-    @Override
-    public String toString() {
-        return "ProvaHW{" +
-                "matricola='" + matricola + '\'' +
-                ", modello='" + modello + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", esito=" + esito +
-                ", timeStartPHW='" + timeStartPHW + '\'' +
-                ", timeEndPHW='" + timeEndPHW + '\'' +
-                ", userid='" + userid + '\'' +
-                ", note=" + note +
-                ", allegati=" + allegati +
-                ", edited=" + edited +
-                '}';
-    }
+    public CondizioniProva getCondizioniprova() {
+		return condizioniprova;
+	}
 
-    public void setEdited(boolean edited) {
+	public void setCondizioniprova(CondizioniProva condizioniprova) {
+		this.condizioniprova = condizioniprova;
+	}
+
+	public String getNumeroRapportoProva() {
+		return numeroRapportoProva;
+	}
+
+	public void setNumeroRapportoProva(String numeroRapportoProva) {
+		this.numeroRapportoProva = numeroRapportoProva;
+	}
+
+	
+
+	@Override
+	public String toString() {
+		return "ProvaHW [numeroRapportoProva=" + numeroRapportoProva + ", condizioniprova=" + condizioniprova
+				+ ", matricola=" + matricola + ", modello=" + modello + ", tipo=" + tipo + ", esito=" + esito
+				+ ", stato=" + stato + ", timeStartPHW=" + timeStartPHW + ", timeEndPHW=" + timeEndPHW + ", userid="
+				+ userid + ", note=" + note + ", allegati=" + allegati + ", edited=" + edited + "]";
+	}
+
+	public void setEdited(boolean edited) {
         this.edited = edited;
     }
     public boolean isEdited(){

@@ -99,6 +99,18 @@ public class MisuratoriFiscale implements Serializable {
         }
         return new Pair<>(ListaMF,ListaM);
     }
+    
+    public Pair<ArrayList<String>,ArrayList<String>> getNumeroRapportoProva() {
+        ArrayList<String> ListaMF = new ArrayList<>();
+        ListaMF.add("");
+        ArrayList<String> ListaM = new ArrayList<>();
+        ListaM.add("");
+        for (MisuratoreFiscale MF:getMisuratoreFiscale()) {
+            ListaMF.add(MF.getNumeroRapportoProva());
+            ListaM.add(MF.getModello());
+        }
+        return new Pair<>(ListaMF,ListaM);
+    }
 
     public void insert(Allegato a) {
         for (MisuratoreFiscale MF:getMisuratoreFiscale()) {
@@ -109,7 +121,7 @@ public class MisuratoriFiscale implements Serializable {
 
     }
 
-	public void setMap(Map<Integer, MisuratoreFiscale> map) {
+	public void setMap(Map<String, MisuratoreFiscale> map) {
 		getMisuratoreFiscale().addAll(map.values());
 	}
 }

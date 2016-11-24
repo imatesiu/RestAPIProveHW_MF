@@ -15,7 +15,24 @@ public class Allegato implements Serializable, Comparable<Allegato> {
      * (Required)
      * 
      */
-    @SerializedName("Matricola")
+	
+	@SerializedName("NRapportoProva")
+	@Expose
+	private String numeroRapportoProva;
+	
+    public String getNumeroRapportoProva() {
+		return numeroRapportoProva;
+	}
+
+	public void setNumeroRapportoProva(String numeroRapportoProva) {
+		this.numeroRapportoProva = numeroRapportoProva;
+	}
+
+	public void setTipoprova(String tipoprova) {
+		this.tipoprova = tipoprova;
+	}
+
+	@SerializedName("Matricola")
     @Expose
     private String matricola;
 

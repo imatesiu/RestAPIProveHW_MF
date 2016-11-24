@@ -15,6 +15,19 @@ public class MisuratoreFiscale implements Serializable {
      * (Required)
      * 
      */
+	@SerializedName("NRapportoProva")
+	@Expose
+	private String numeroRapportoProva;
+	
+    public String getNumeroRapportoProva() {
+		return numeroRapportoProva;
+	}
+
+	public void setNumeroRapportoProva(String numeroRapportoProva) {
+		this.numeroRapportoProva = numeroRapportoProva;
+	}
+	
+	
     @SerializedName("Nome")
     @Expose
     private String nome;
@@ -260,8 +273,8 @@ public class MisuratoreFiscale implements Serializable {
             boolean f = true;
             for (ProvaHW prova : getProveHW().getProvaHW()){
                 Esito e  = prova.getEsito();
-                if(e == e.Incorso){
-                    return e.Incorso.toString();
+                if(e == e.Incerto){
+                    return e.Incerto.toString();
                 }
                 if(e == e.Negativo){
                     return e.Negativo.toString();
@@ -304,10 +317,12 @@ public class MisuratoreFiscale implements Serializable {
         }
         ProvaHW p = new ProvaHW();
         p.setTipo(a.getTipoProva());
+        p.setNumeroRapportoProva(a.getNumeroRapportoProva());
         p.setMatricola(a.getMatricola());
         p.setModello(a.getModello());
         p.setTimeStartPHW(a.getTime());
-        p.setEsito(Esito.Incorso);
+        p.setStato(StatoProve.Incorso);
+        p.setEsito(Esito.Incerto);
         getProveHW().getProvaHW().add(p);
         Allegati oo = p.getAllegati();
         oo.getAllegato().add(a);
