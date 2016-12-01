@@ -3,6 +3,7 @@ package isti.cnr.sse.rest.impl;
 import java.util.Map;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.jboss.weld.environment.util.Collections;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -118,7 +121,7 @@ public class APITestHWImpl{
 				
 				
 				Ditte d = new Ditte();
-				d.setListaDitte((List<Ditta>) map.values());
+				d.setListaDitte(new ArrayList<>(map.values()));
 				Gson g = new Gson();
 				return  g.toJson(d);
 		//	}
