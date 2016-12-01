@@ -3,6 +3,7 @@ package isti.cnr.sse.rest.impl;
 import java.util.Map;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,11 +33,12 @@ public class APITestHWImpl{
 	//@Inject 
 	//TokenPersistence em;
 
-	//private static Map<String,MisuratoreFiscale> map = new HashMap<String,MisuratoreFiscale>();
+	private static Map<String,Ditta> map = new HashMap<String,Ditta>();
 
 	private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(APITestHWImpl.class);
 
 
+	
 
 /*	@Path("/")
 	@POST
@@ -47,9 +49,15 @@ public class APITestHWImpl{
 	
 	@Path("/ditta/")
 	@POST
-	public String putDitta(String  ditta){
+	public String putDitta(String  d){
+		Factory factory = new Factory();
+		map = factory.getMap();
 		Gson g = new Gson();
-		g.fromJson(ditta, Ditta.class);
+		Ditta ditta = g.fromJson(d, Ditta.class);
+		if(map.containsKey(ditta)){
+			return "Elemento gia presente";
+		}
+		map.put(ditta.getNomeDitta(), ditta);
 		return "OK";
 		
 	}
@@ -58,8 +66,16 @@ public class APITestHWImpl{
 	@POST
 	public String putModello(String  MF){
 		Gson g = new Gson();
-		g.fromJson(MF, ModelloMF.class);
-		return "OK";
+		ModelloMF modello =  g.fromJson(MF, ModelloMF.class);
+		if(map.containsKey(modello.getNomeDitta())){
+			Ditta d = map.get(modello.getNomeDitta());
+			if(!d.getMisuratoriFiscali().contains(modello)){
+				d.getMisuratoriFiscali().add(modello);
+				return "OK";
+			}
+			return "Modello gia presente";
+		}
+		return "Ditta non trovata";
 		
 	}
 	
@@ -79,11 +95,11 @@ public class APITestHWImpl{
 	@Path("/dittestring/")
 	@GET
 	public String getDitteName(){
-		Factory factory = new Factory();
 		
-		Ditte d = factory.getDitte();
+		
+		Collection<String> d = map.keySet();
 		Gson g = new Gson();
-		return  g.toJson(d.getDitteString());
+		return  g.toJson(d);
 		
 		
 	}
@@ -99,9 +115,10 @@ public class APITestHWImpl{
 				return  MFS;*/
 			}
 		//	if(numeroelementi.equals("test")){			
-				Factory factory = new Factory();
 				
-				Ditte d = factory.getDitte();
+				
+				Ditte d = new Ditte();
+				d.setListaDitte((List<Ditta>) map.values());
 				Gson g = new Gson();
 				return  g.toJson(d);
 		//	}
