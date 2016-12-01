@@ -1,1 +1,24 @@
-Fatal For input string: ""
+Logging Provider: org.jboss.logging.Log4jLoggerProvider
+WELD-ENV-001008: Initialize Weld using ServletContainerInitializer
+WELD-000900: 2.3.3 (Final)
+WELD-ENV-000020: Using jandex for bean discovery
+WELD-ENV-000024: Archive isolation enabled - creating multiple isolated bean archives if needed
+WELD-ENV-000028: Weld initialization skipped - no bean archive found
+Logging Provider: org.jboss.logging.Log4jLoggerProvider
+WELD-ENV-001008: Initialize Weld using ServletContainerInitializer
+WELD-000900: 2.3.3 (Final)
+WELD-ENV-000020: Using jandex for bean discovery
+WELD-ENV-000024: Archive isolation enabled - creating multiple isolated bean archives if needed
+WELD-ENV-000028: Weld initialization skipped - no bean archive found
+Logging Provider: org.jboss.logging.Log4jLoggerProvider
+WELD-ENV-001008: Initialize Weld using ServletContainerInitializer
+WELD-000900: 2.3.3 (Final)
+WELD-ENV-000020: Using jandex for bean discovery
+WELD-ENV-000024: Archive isolation enabled - creating multiple isolated bean archives if needed
+WELD-ENV-000028: Weld initialization skipped - no bean archive found
+Logging Provider: org.jboss.logging.Log4jLoggerProvider
+WELD-ENV-001008: Initialize Weld using ServletContainerInitializer
+WELD-000900: 2.3.3 (Final)
+WELD-ENV-000020: Using jandex for bean discovery
+WELD-ENV-000024: Archive isolation enabled - creating multiple isolated bean archives if needed
+WELD-ENV-000028: Weld initialization skipped - no bean archive found
