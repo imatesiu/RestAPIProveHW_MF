@@ -1,6 +1,8 @@
 package isti.cnr.sse.rest.impl;
 
 import java.util.Map;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,9 +17,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import isti.cnr.sse.rest.data.Ditta;
 import isti.cnr.sse.rest.data.Ditte;
 import isti.cnr.sse.rest.data.Factory;
+import isti.cnr.sse.rest.data.ModelloMF;
+import isti.cnr.sse.rest.data.Prova;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/cnr/sse/testhw")
@@ -39,6 +45,36 @@ public class APITestHWImpl{
 		
 	}*/
 	
+	@Path("/ditta/")
+	@POST
+	public String putDitta(String  ditta){
+		Gson g = new Gson();
+		g.fromJson(ditta, Ditta.class);
+		return "OK";
+		
+	}
+	
+	@Path("/modello/")
+	@POST
+	public String putModello(String  MF){
+		Gson g = new Gson();
+		g.fromJson(MF, ModelloMF.class);
+		return "OK";
+		
+	}
+	
+	@Path("/prove/")
+	@POST
+	public String putProveHW(String  MF){
+		Type listType = new TypeToken<ArrayList<Prova>>(){}.getType();
+
+		
+		Gson g = new Gson();
+		List<Prova> yourClassList = g.fromJson(MF, listType);
+		return "OK";
+		
+	}
+	
 
 	@Path("/ditte/{howmany:.*}")
 	@GET
@@ -49,14 +85,14 @@ public class APITestHWImpl{
 				MFS.setMap(map);
 				return  MFS;*/
 			}
-			if(numeroelementi.equals("test")){			
+		//	if(numeroelementi.equals("test")){			
 				Factory factory = new Factory();
 				
 				Ditte d = factory.getDitte();
 				Gson g = new Gson();
 				return  g.toJson(d);
-			}
-			return null;
+		//	}
+		//	return null;
 		}catch(Exception e){
 			log.fatal("Fatal "+e.getMessage());
 			return null;
