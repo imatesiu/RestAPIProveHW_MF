@@ -75,6 +75,19 @@ public class APITestHWImpl{
 		
 	}
 	
+	
+	@Path("/dittestring/")
+	@GET
+	public String getDitteName(){
+		Factory factory = new Factory();
+		
+		Ditte d = factory.getDitte();
+		Gson g = new Gson();
+		return  g.toJson(d.getDitteString());
+		
+		
+	}
+	
 
 	@Path("/ditte/{howmany:.*}")
 	@GET
