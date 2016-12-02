@@ -1,6 +1,7 @@
 package isti.cnr.sse.rest.impl;
 
 import java.util.Map;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.jboss.weld.environment.util.Collections;
 
@@ -130,6 +132,21 @@ public class APITestHWImpl{
 			log.fatal("Fatal "+e.getMessage());
 			return null;
 		}
+		
+		
+	}
+	
+	@Path("/allegati/{id:.*}/{nome:.*}")
+	@GET
+	public Response getAllegato(@PathParam("id") String id, @PathParam("nome") String nome){
+		
+		InputStream is = APITestHWImpl.class.getClassLoader().getResourceAsStream("mini.jpg");
+		
+		
+		return Response
+                .ok(is, MediaType.APPLICATION_OCTET_STREAM)
+                .header("content-disposition","attachment; filename = "+nome)
+                .build();
 		
 		
 	}
