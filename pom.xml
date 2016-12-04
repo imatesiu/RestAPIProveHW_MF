@@ -151,6 +151,11 @@
 			<version>3.0</version>
 		</dependency>
 		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
 			<groupId>cnr.isti.sse.rest.data</groupId>
 			<artifactId>dataTestHW</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -191,7 +196,7 @@
 					</webApp>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 </project>
