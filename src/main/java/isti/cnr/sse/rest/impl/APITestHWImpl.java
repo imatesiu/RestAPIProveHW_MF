@@ -9,6 +9,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -98,9 +99,9 @@ public class APITestHWImpl{
 		//List<Prova> Listprove = g.fromJson(MF, listType);
 		Prova prova = g.fromJson(Prova, Prova.class);
 		String d = prova.getNomeDitta();
-		if(map.containsKey(d) & !prova.getListallegato().isEmpty()){
+		if(map.containsKey(d) ){
 			Ditta ditta = map.get(d);
-			int index = ditta.getMisuratoriFiscali().indexOf(new ModelloMF(prova.getNomeModello(),prova.getNumeroRapportoProva() ,prova.getNomeDitta()));
+			int index = ditta.getMisuratoriFiscali().indexOf(new ModelloMF(prova.getNomeModello(),prova.getNumeroRapportoProva() ,prova.getNomeDitta(),new Date()));
 			if(index>=0){
 				ModelloMF modello = ditta.getMisuratoriFiscali().get(index);
 				int ind = modello.getProve().indexOf(prova);
@@ -108,6 +109,8 @@ public class APITestHWImpl{
 					Prova pp = modello.getProve().get(ind);
 					//TODO: cambiare dove salvare i file 
 					saveallegati(prova.getListallegato());
+					pp.setStato(prova.getStato());
+					pp.setNote(prova.getNote());
 					pp.getListallegato().addAll(prova.getListallegato());
 					System.out.println("");
 				}
