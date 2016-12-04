@@ -84,14 +84,17 @@ public class APITestHWImpl{
 		
 	}
 	
-	@Path("/prove/")
+	@Path("/provaupdated/")
 	@POST
-	public String putProveHW(String  MF){
-		Type listType = new TypeToken<ArrayList<Prova>>(){}.getType();
+	public String putProveHW(String  Prova){
+		//Type listType = new TypeToken<ArrayList<Prova>>(){}.getType();
 
 		
 		Gson g = new Gson();
-		List<Prova> yourClassList = g.fromJson(MF, listType);
+		//List<Prova> Listprove = g.fromJson(MF, listType);
+		Prova prova = g.fromJson(Prova, Prova.class);
+		
+		
 		return "OK";
 		
 	}
