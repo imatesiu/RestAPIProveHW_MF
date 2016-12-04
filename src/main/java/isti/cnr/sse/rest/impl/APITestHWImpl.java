@@ -198,14 +198,19 @@ public class APITestHWImpl{
 	@GET
 	public Response getAllegato(@PathParam("id") String id, @PathParam("nome") String nome){
 
-		InputStream is = APITestHWImpl.class.getClassLoader().getResourceAsStream("mini.jpg");
+		//InputStream is = APITestHWImpl.class.getClassLoader().getResourceAsStream("mini.jpg");
+		try{
+			FileOutputStream imageOutFile = new FileOutputStream("../allegati/"+id+"/"+nome);
 
 
-		return Response
-				.ok(is, MediaType.APPLICATION_OCTET_STREAM)
-				.header("content-disposition","attachment; filename = "+nome)
-				.build();
-
+			return Response
+					.ok(imageOutFile, MediaType.APPLICATION_OCTET_STREAM)
+					.header("content-disposition","attachment; filename = "+nome)
+					.build();
+		}catch (IOException e) {
+				//TODO: non ce il file
+		}
+		return Response.noContent().build();
 
 	}
 
