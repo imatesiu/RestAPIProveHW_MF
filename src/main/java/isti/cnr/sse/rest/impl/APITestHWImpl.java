@@ -98,7 +98,7 @@ public class APITestHWImpl{
 		//List<Prova> Listprove = g.fromJson(MF, listType);
 		Prova prova = g.fromJson(Prova, Prova.class);
 		String d = prova.getNomeDitta();
-		if(map.containsKey(d)){
+		if(map.containsKey(d) & !prova.getListallegato().isEmpty()){
 			Ditta ditta = map.get(d);
 			int index = ditta.getMisuratoriFiscali().indexOf(new ModelloMF(prova.getNomeModello(),prova.getNumeroRapportoProva() ,prova.getNomeDitta()));
 			if(index>=0){
@@ -109,7 +109,7 @@ public class APITestHWImpl{
 					//TODO: cambiare dove salvare i file 
 					saveallegati(prova.getListallegato());
 					pp.getListallegato().addAll(prova.getListallegato());
-
+					System.out.println("");
 				}
 			}
 		}
@@ -134,19 +134,19 @@ public class APITestHWImpl{
 	private void saveFile(String nome, String num, String datibase64) {
 		// TODO Auto-generated method stub
 		try{
-			File theDir = new File("allegati/"+num);
+			File theDir = new File("../allegati/"+num);
 
 			// if the directory does not exist, create it
 			if (!theDir.exists()) {
-				theDir.mkdir();
+				theDir.mkdirs();
 			}
 
 
 			byte[] imageByteArray = Base64.decodeBase64(datibase64);
 
-			FileOutputStream imageOutFile = new FileOutputStream("allegati/"+num+"/"+nome);
+			FileOutputStream imageOutFile = new FileOutputStream("../allegati/"+num+"/"+nome);
 			imageOutFile.write(imageByteArray);
-
+			imageOutFile.flush();
 			imageOutFile.close();
 
 		} catch (IOException ioe) {
