@@ -173,7 +173,7 @@ public class APITestHWImpl{
 
 	@Path("/ditte/{howmany:.*}")
 	@GET
-	public String getListMisuratoriFiscale(@PathParam("howmany") String numeroelementi){
+	public String getListDitte(@PathParam("howmany") String numeroelementi){
 		try{
 			if(numeroelementi.equals("all")){			
 				/**MisuratoriFiscale MFS = new MisuratoriFiscale();
@@ -187,6 +187,35 @@ public class APITestHWImpl{
 			d.setListaDitte(new ArrayList<>(map.values()));
 			Gson g = new Gson();
 			return  g.toJson(d);
+			//	}
+			//	return null;
+		}catch(Exception e){
+			log.fatal("Fatal "+e.getMessage());
+			return null;
+		}
+
+
+	}
+	
+	
+	@Path("/misuratorifiscali/{howmany:.*}")
+	@GET
+	public String getListMisuratori(@PathParam("howmany") String numeroelementi){
+		try{
+			if(numeroelementi.equals("all")){			
+				/**MisuratoriFiscale MFS = new MisuratoriFiscale();
+				MFS.setMap(map);
+				return  MFS;*/
+			}
+			Factory factory = new Factory();
+			map = factory.getMap();
+			//	if(numeroelementi.equals("test")){			
+			List<ModelloMF> lmf = new ArrayList<>();
+			for(Ditta d : map.values()){
+				lmf.addAll(d.getMisuratoriFiscali());
+			}
+			Gson g = new Gson();
+			return  g.toJson(lmf);
 			//	}
 			//	return null;
 		}catch(Exception e){
