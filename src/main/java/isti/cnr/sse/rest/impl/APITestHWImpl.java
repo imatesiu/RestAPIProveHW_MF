@@ -2,6 +2,7 @@ package isti.cnr.sse.rest.impl;
 
 import java.util.Map;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -278,14 +279,14 @@ public class APITestHWImpl{
 
 		//InputStream is = APITestHWImpl.class.getClassLoader().getResourceAsStream("mini.jpg");
 		try{
-			FileOutputStream imageOutFile = new FileOutputStream("../allegati/"+id+"/"+nome);
-
+			File  imageOutFile = new File("../allegati/"+id+"/"+nome);
+			InputStream targetStream = new FileInputStream(imageOutFile);
 
 			return Response
-					.ok(imageOutFile, MediaType.APPLICATION_OCTET_STREAM)
+					.ok(targetStream, MediaType.APPLICATION_OCTET_STREAM)
 					.header("content-disposition","attachment; filename = "+nome)
 					.build();
-		}catch (IOException e) {
+		}catch (Exception e) {
 				//TODO: non ce il file
 		}
 		return Response.noContent().build();
