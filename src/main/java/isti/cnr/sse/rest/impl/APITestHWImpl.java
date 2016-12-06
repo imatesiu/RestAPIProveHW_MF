@@ -120,6 +120,52 @@ public class APITestHWImpl{
 		return "OK";
 
 	}
+	
+	@Path("/listprovaupdated/")
+	@POST
+	public String putlistProveHW(String  listProva){
+		Type listType = new TypeToken<ArrayList<Prova>>(){}.getType();
+
+
+		Gson g = new Gson();
+		List<Prova> Listprove = g.fromJson(listProva, listType);
+		
+		for(Prova prova: Listprove){
+		
+		String d = prova.getNomeDitta();
+		if(map.containsKey(d) ){
+			Ditta ditta = map.get(d);
+			int index = ditta.getMisuratoriFiscali().indexOf(new ModelloMF(prova.getNomeModello(),prova.getNumeroRapportoProva() ,prova.getNomeDitta(),new Date()));
+			if(index>=0){
+				ModelloMF modello = ditta.getMisuratoriFiscali().get(index);
+				int ind = modello.getProve().indexOf(prova);
+				if(ind>=0){
+					Prova pp = modello.getProve().get(ind);
+					//TODO: cambiare dove salvare i file 
+					saveallegati(prova.getListallegato());
+					pp.setStato(prova.getStato());
+					pp.setNote(prova.getNote());
+					pp.getListallegato().addAll(prova.getListallegato());
+					System.out.println("");
+				}
+			}
+		}
+		}
+
+		return "OK";
+
+	}
+	
+	
+	@Path("/misuratoriupdated/")
+	@POST
+	public String putMisuratori(String  misuratori){
+		Gson g = new Gson();
+		Type listType = new TypeToken<ArrayList<ModelloMF>>(){}.getType();
+		List<ModelloMF> Listmf = g.fromJson(misuratori, listType);
+		
+		return "OK";
+	}
 
 
 	private void saveallegati(List<Allegato> listallegato) {
@@ -207,8 +253,8 @@ public class APITestHWImpl{
 				MFS.setMap(map);
 				return  MFS;*/
 			}
-			Factory factory = new Factory();
-			map = factory.getMap();
+			//Factory factory = new Factory();
+			//map = factory.getMap();
 			//	if(numeroelementi.equals("test")){			
 			List<ModelloMF> lmf = new ArrayList<>();
 			for(Ditta d : map.values()){
