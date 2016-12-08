@@ -26,6 +26,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -244,6 +245,25 @@ public class APITestHWImpl{
 
 	}
 	
+	@Path("/stat/")
+	@GET
+	public String getStat(){
+		try{
+			
+
+			Ditte d = new Ditte();
+			d.setListaDitte(new ArrayList<>(map.values()));
+			
+			Gson g = new Gson();
+			return  g.toJson(d.getStat());
+			
+		}catch(Exception e){
+			log.fatal("Fatal "+e.getMessage());
+			return null;
+		}
+	}
+	
+	
 	
 	@Path("/misuratorifiscali/{howmany:.*}")
 	@GET
@@ -288,6 +308,7 @@ public class APITestHWImpl{
 					.build();
 		}catch (Exception e) {
 				//TODO: non ce il file
+			System.out.println("");
 		}
 		return Response.noContent().build();
 
