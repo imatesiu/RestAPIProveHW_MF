@@ -313,15 +313,15 @@ public class APITestHWImpl{
 
 	}
 
-	@Path("/modellistring/{ditta:.*}")
+	@Path("/modellistring/{ditta:.*}/{nome:.*}")
 	@GET
-	public String getModelliString(@PathParam("ditta") String ditta){
+	public String getModelliString(@PathParam("ditta") String ditta, @PathParam("anno") String anno){
 		try{
 
 
 
 			Ditta d = map.get(ditta);
-			List<String> modelli =  d.getMFString();
+			List<String> modelli =  d.getMFString(anno);
 			Gson g = new Gson();
 			return  g.toJson(modelli);
 			//	}
@@ -340,10 +340,11 @@ public class APITestHWImpl{
 
 
 			Ditta d = map.get(ditta);
-			int index = d.getMisuratoriFiscali().indexOf(new ModelloMF(modello, "", ditta, ""));
+			int index = d.getMisuratoriFiscali().indexOf(new ModelloMF(modello, null, ditta, ""));
 			if(index>=0){
 				Gson g = new Gson();
-				return  g.toJson(d.getMisuratoriFiscali().get(index));
+				ModelloMF res = d.getMisuratoriFiscali().get(index);
+				return  g.toJson(res);
 			}
 			return "KO";
 			//	}
