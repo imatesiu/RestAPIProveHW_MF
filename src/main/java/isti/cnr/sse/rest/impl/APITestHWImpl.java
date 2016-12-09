@@ -121,7 +121,7 @@ public class APITestHWImpl{
 		return "OK";
 
 	}
-	
+
 	@Path("/listprovaupdated/")
 	@POST
 	public String putlistProveHW(String  listProva){
@@ -130,41 +130,41 @@ public class APITestHWImpl{
 
 		Gson g = new Gson();
 		List<Prova> Listprove = g.fromJson(listProva, listType);
-		
+
 		for(Prova prova: Listprove){
-		
-		String d = prova.getNomeDitta();
-		if(map.containsKey(d) ){
-			Ditta ditta = map.get(d);
-			int index = ditta.getMisuratoriFiscali().indexOf(new ModelloMF(prova.getNomeModello(),prova.getNumeroRapportoProva() ,prova.getNomeDitta(),new Date()));
-			if(index>=0){
-				ModelloMF modello = ditta.getMisuratoriFiscali().get(index);
-				int ind = modello.getProve().indexOf(prova);
-				if(ind>=0){
-					Prova pp = modello.getProve().get(ind);
-					//TODO: cambiare dove salvare i file 
-					saveallegati(prova.getListallegato());
-					pp.setStato(prova.getStato());
-					pp.setNote(prova.getNote());
-					pp.getListallegato().addAll(prova.getListallegato());
-					System.out.println("");
+
+			String d = prova.getNomeDitta();
+			if(map.containsKey(d) ){
+				Ditta ditta = map.get(d);
+				int index = ditta.getMisuratoriFiscali().indexOf(new ModelloMF(prova.getNomeModello(),prova.getNumeroRapportoProva() ,prova.getNomeDitta(),new Date()));
+				if(index>=0){
+					ModelloMF modello = ditta.getMisuratoriFiscali().get(index);
+					int ind = modello.getProve().indexOf(prova);
+					if(ind>=0){
+						Prova pp = modello.getProve().get(ind);
+						//TODO: cambiare dove salvare i file 
+						saveallegati(prova.getListallegato());
+						pp.setStato(prova.getStato());
+						pp.setNote(prova.getNote());
+						pp.getListallegato().addAll(prova.getListallegato());
+						System.out.println("");
+					}
 				}
 			}
-		}
 		}
 
 		return "OK";
 
 	}
-	
-	
+
+
 	@Path("/misuratoriupdated/")
 	@POST
 	public String putMisuratori(String  misuratori){
 		Gson g = new Gson();
 		Type listType = new TypeToken<ArrayList<ModelloMF>>(){}.getType();
 		List<ModelloMF> Listmf = g.fromJson(misuratori, listType);
-		
+
 		return "OK";
 	}
 
@@ -243,27 +243,27 @@ public class APITestHWImpl{
 
 
 	}
-	
+
 	@Path("/stat/")
 	@GET
 	public String getStat(){
 		try{
-			
+
 
 			Ditte d = new Ditte();
 			d.setListaDitte(new ArrayList<>(map.values()));
-			
+
 			Gson g = new Gson();
 			return  g.toJson(d.getStat());
-			
+
 		}catch(Exception e){
 			log.fatal("Fatal "+e.getMessage());
 			return null;
 		}
 	}
-	
-	
-	
+
+
+
 	@Path("/misuratorifiscali/{howmany:.*}")
 	@GET
 	public String getListMisuratori(@PathParam("howmany") String numeroelementi){
@@ -306,10 +306,52 @@ public class APITestHWImpl{
 					.header("content-disposition","attachment; filename = "+nome)
 					.build();
 		}catch (Exception e) {
-				//TODO: non ce il file
+			//TODO: non ce il file
 			System.out.println("");
 		}
 		return Response.noContent().build();
+
+	}
+
+	@Path("/modellistring/{ditta:.*}")
+	@GET
+	public String getModelliString(@PathParam("ditta") String ditta){
+		try{
+
+
+
+			Ditta d = map.get(ditta);
+			List<String> modelli =  d.getMFString();
+			Gson g = new Gson();
+			return  g.toJson(modelli);
+			//	}
+			//	return null;
+		}catch(Exception e){
+			log.fatal("Fatal "+e.getMessage());
+			return null;
+		}
+	}
+
+	@Path("/modello/{ditta:.*}/{modello:.*}")
+	@GET
+	public String getMisuratore(@PathParam("ditta") String ditta, @PathParam("modello") String modello){
+		try{
+
+
+
+			Ditta d = map.get(ditta);
+			int index = d.getMisuratoriFiscali().indexOf(new ModelloMF(modello, "", ditta, ""));
+			if(index>=0){
+				Gson g = new Gson();
+				return  g.toJson(d.getMisuratoriFiscali().get(index));
+			}
+			return "KO";
+			//	}
+			//	return null;
+		}catch(Exception e){
+			log.fatal("Fatal "+e.getMessage());
+			return null;
+		}
 
 	}
 
