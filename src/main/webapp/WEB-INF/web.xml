@@ -21,7 +21,16 @@
 		     <param-name>jersey.config.server.provider.packages</param-name>
 		     <param-value>isti.cnr.sse.rest.impl</param-value>
 		</init-param>
-		<!-- <init-param>
+		<!--<init-param>
+			<param-name>com.sun.jersey.spi.container.ContainerRequestFilter</param-name>
+			<param-value>isti.cnr.sse.rest.AuthenticationFilter</param-value>
+		</init-param>
+		  <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>isti.cnr.sse.rest.CustomApplicationConfig</param-value>
+        </init-param>
+		
+		<init-param>
 			<param-name>org.glassfish.jersey.container.ContainerResponseFilters</param-name>
 			<param-value>eu.learnpad.ca.rest.api.web.security.ResponseCorsFilter</param-value>
 		</init-param>

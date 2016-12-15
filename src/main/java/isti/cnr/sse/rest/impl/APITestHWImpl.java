@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 //import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -38,6 +39,7 @@ import isti.cnr.sse.rest.data.ModelloMF;
 import isti.cnr.sse.rest.data.Prova;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+//@RolesAllowed("ADMIN")
 @Path("/cnr/sse/testhw")
 public class APITestHWImpl{
 
@@ -205,6 +207,7 @@ public class APITestHWImpl{
 
 	}
 
+	
 	@Path("/dittestring/")
 	@GET
 	public String getDitteName(){
@@ -216,6 +219,7 @@ public class APITestHWImpl{
 
 
 	}
+
 
 
 	@Path("/ditte/{howmany:.*}")
